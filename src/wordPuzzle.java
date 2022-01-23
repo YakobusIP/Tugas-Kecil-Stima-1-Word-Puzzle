@@ -1,10 +1,9 @@
 import java.io.*;
-import java.nio.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class main {
+public class wordPuzzle {
     // DECLARING COLOR SPACES
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_MAGENTA = "\u001b[35;1m";
@@ -14,7 +13,7 @@ public class main {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_BRIGHT_RED = "\u001b[31;1m";
 
     public static boolean isWithinRange(int index, int lowerBound, int upperBound) {
         if ((index >= lowerBound) && (index < upperBound)) {
@@ -24,12 +23,12 @@ public class main {
         }
     }
 
-    public static void main (String[] args) throws java.io.FileNotFoundException {
+    public static void main (String[] args) {
         int i, j, k, x, y;
         int letterCounter, charIndexX, charIndexY, stepsTaken;
         int ansX, ansY;
         String testCase, chars;
-        Character currentChar, firstChar;
+        Character currentChar;
         boolean markFound = false;
         boolean checkFlag;
         boolean up, rightup, right, rightdown, down, leftdown, left, leftup;
@@ -55,7 +54,7 @@ public class main {
         finalleft = false;
         finalleftup = false;
         try {
-            List<String> fullFile = Files.readAllLines(Paths.get("test.txt"));
+            List<String> fullFile = Files.readAllLines(Paths.get("large.txt"));
             ArrayList<ArrayList<Character>> game = new ArrayList<ArrayList<Character>>();
 
             // READING MATRIX
@@ -71,6 +70,15 @@ public class main {
                         col.add(chars.charAt(0));
                     }
                     game.add(col);
+                    scanElmt.close();
+                }
+            }
+
+            // CREATE COLOR MATRIX
+            String[][] color_codes = new String[game.size()][game.get(0).size()];
+            for (i=0;i<game.size();i++) {
+                for(j=0;j<game.get(i).size();j++) {
+                    color_codes[i][j] = ANSI_RESET;
                 }
             }
 
@@ -100,10 +108,10 @@ public class main {
                             if (game.get(i).get(j) == testCase.charAt(0)) {
                                 k = 0;
                                 x = j; // Letak baris
-                                //System.out.println("Currently reading:");
-                                //System.out.println("X" + x);
+                                System.out.println("Currently reading:");
+                                System.out.println("X" + x);
                                 y = i; // Letak kolom
-                                //System.out.println("Y" + y);
+                                System.out.println("Y" + y);
                                 // CHECK EVERY DIRECTION
                                 // IF CURRENTLY SCANNING TOP LEFT CORNER
                                 if ((i == 0) && (j == 0)) {
@@ -113,12 +121,12 @@ public class main {
                                         right = true;
                                     }
                                     // Arah kanan bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x+1)) {
                                         stepsTaken++;
                                         rightdown = true;
                                     }
                                     // Arah bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
                                         stepsTaken++;
                                         down = true;
                                     }
@@ -130,12 +138,12 @@ public class main {
                                         down = true;
                                     }
                                     // Arah kiri bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x-1)) {
                                         stepsTaken++;
                                         leftdown = true;
                                     }
                                     // Arah kiri
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
                                         stepsTaken++;
                                         left = true;
                                     }
@@ -148,12 +156,12 @@ public class main {
                                         up = true;
                                     }
                                     // Arah kanan atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x+1)) {
                                         stepsTaken++;
                                         rightup = true;
                                     }
                                     // Arah kanan
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x+1)) {
                                         stepsTaken++;
                                         right = true;
                                     }
@@ -165,12 +173,12 @@ public class main {
                                         up = true;
                                     }
                                     // Arah kiri atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x-1)) {
                                         stepsTaken++;
                                         leftup = true;
                                     }
                                     // Arah kiri
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
                                         stepsTaken++;
                                         left = true;
                                     }
@@ -182,22 +190,22 @@ public class main {
                                         right = true;
                                     }
                                     // Arah kanan bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x+1)) {
                                         stepsTaken++;
                                         rightdown = true;
                                     }
                                     // Arah bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
                                         stepsTaken++;
                                         down = true;
                                     }
                                     // Arah kiri bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x-1)) {
                                         stepsTaken++;
                                         leftdown = true;
                                     }
                                     // Arah kiri
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
                                         stepsTaken++;
                                         left = true;
                                     }
@@ -209,49 +217,49 @@ public class main {
                                         up = true;
                                     }
                                     // Arah kanan atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x+1)) {
                                         stepsTaken++;
                                         rightup = true;
                                     }
                                     // Arah kanan
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x+1)) {
                                         stepsTaken++;
                                         right = true;
                                     }
                                     // Arah kanan bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x+1)) {
                                         stepsTaken++;
                                         rightdown = true;
                                     }
                                     // Arah bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
                                         stepsTaken++;
                                         down = true;
                                     }
                                 // IF CURRENTLY SCANNING BOTTOM ROW
-                                }  else if ((i == game.size()-1) && (j != 0)) {
+                                } else if ((i == game.size()-1) && (j != 0)) {
                                     // Arah kiri
                                     if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
                                         stepsTaken++;
                                         left = true;
                                     }
                                     // Arah kiri atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x-1)) {
                                         stepsTaken++;
                                         leftup = true;
                                     }
                                     // Arah atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x)) {
                                         stepsTaken++;
                                         up = true;
                                     }
                                     // Arah kanan atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x+1)) {
                                         stepsTaken++;
                                         rightup = true;
                                     }
                                     // Arah kanan
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x+1)) {
                                         stepsTaken++;
                                         right = true;
                                     }
@@ -263,22 +271,22 @@ public class main {
                                         up = true;
                                     }
                                     // Arah kiri atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x-1)) {
                                         stepsTaken++;
                                         leftup = true;
                                     }
                                     // Arah kiri
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
                                         stepsTaken++;
                                         left = true;
                                     }
                                     // Arah kiri bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x-1)) {
                                         stepsTaken++;
                                         leftdown = true;
                                     }
                                     // Arah bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
                                         stepsTaken++;
                                         down = true;
                                     }
@@ -290,42 +298,42 @@ public class main {
                                         up = true;
                                     }
                                     // Arah kanan atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x+1)) {
                                         stepsTaken++;
                                         rightup = true;
                                     }
                                     // Arah kanan
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x+1)) {
                                         stepsTaken++;
                                         right = true;
                                     }
                                     // Arah kanan bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x+1)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x+1)) {
                                         stepsTaken++;
                                         rightdown = true;
                                     }
                                     // Arah bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x)) {
                                         stepsTaken++;
                                         down = true;
                                     }
                                     // Arah kiri bawah
-                                    else if (testCase.charAt(k+1) == game.get(y+1).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y+1).get(x-1)) {
                                         stepsTaken++;
                                         leftdown = true;
                                     }
                                     // Arah kiri
-                                    else if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y).get(x-1)) {
                                         stepsTaken++;
                                         left = true;
                                     }
                                     // Arah kiri atas
-                                    else if (testCase.charAt(k+1) == game.get(y-1).get(x-1)) {
+                                    if (testCase.charAt(k+1) == game.get(y-1).get(x-1)) {
                                         stepsTaken++;
                                         leftup = true;
                                     }
                                 }
-                                /*
+                                
                                 System.out.println("Up:" + up);
                                 System.out.println("Rightup:" + rightup);
                                 System.out.println("Right:" + right);
@@ -333,7 +341,7 @@ public class main {
                                 System.out.println("Down:" + down);
                                 System.out.println("Leftdown:" + leftdown); 
                                 System.out.println("Left:" + left);
-                                System.out.println("Leftup:" + leftup);*/
+                                System.out.println("Leftup:" + leftup);
 
                                 // ITERATE THE REST OF CHARACTERS BASED ON FLAG
                                 checkFlag = true;
@@ -530,37 +538,45 @@ public class main {
                                             if (finalup) {
                                                 currentChar = testCase.charAt(i);
                                                 answer[ansY][ansX] = String.valueOf(currentChar);
+                                                color_codes[ansY][ansX] = ANSI_BLUE;
                                                 ansY--;
                                             } else if (finalrightup) {
                                                 currentChar = testCase.charAt(i);
                                                 answer[ansY][ansX] = String.valueOf(currentChar);
+                                                color_codes[ansY][ansX] = ANSI_CYAN;
                                                 ansX++;
                                                 ansY--;
                                             } else if (finalright) {
                                                 currentChar = testCase.charAt(i);
                                                 answer[ansY][ansX] = String.valueOf(currentChar);
+                                                color_codes[ansY][ansX] = ANSI_GREEN;
                                                 ansX++;
                                             } else if (finalrightdown) {
                                                 currentChar = testCase.charAt(i);
                                                 answer[ansY][ansX] = String.valueOf(currentChar);
+                                                color_codes[ansY][ansX] = ANSI_MAGENTA;
                                                 ansX++;
                                                 ansY++;
                                             } else if (finaldown) {
                                                 currentChar = testCase.charAt(i);
                                                 answer[ansY][ansX] = String.valueOf(currentChar);
+                                                color_codes[ansY][ansX] = ANSI_PURPLE;
                                                 ansY++;
                                             } else if (finalleftdown) {
                                                 currentChar = testCase.charAt(i);
                                                 answer[ansY][ansX] = String.valueOf(currentChar);
+                                                color_codes[ansY][ansX] = ANSI_RED;
                                                 ansX--;
                                                 ansY++;
                                             } else if (finalleft) {
                                                 currentChar = testCase.charAt(i);
                                                 answer[ansY][ansX] = String.valueOf(currentChar);
+                                                color_codes[ansY][ansX] = ANSI_BRIGHT_RED;
                                                 ansX--;
                                             } else if (finalleftup) {
                                                 currentChar = testCase.charAt(i);
                                                 answer[ansY][ansX] = String.valueOf(currentChar);
+                                                color_codes[ansY][ansX] = ANSI_YELLOW;
                                                 ansX--;
                                                 ansY--;
                                             }
@@ -568,32 +584,8 @@ public class main {
 
                                         for (i=0;i<game.size();i++) {
                                             for (j=0;j<game.get(i).size();j++) {
-                                                if (finalup) {
-                                                    System.out.print(ANSI_BLUE + answer[i][j] + ANSI_RESET);
-                                                    System.out.print(" ");
-                                                } else if (finalrightup) {
-                                                    System.out.print(ANSI_CYAN + answer[i][j] + ANSI_RESET);
-                                                    System.out.print(" ");
-                                                } else if (finalright) {
-                                                    System.out.print(ANSI_GREEN + answer[i][j] + ANSI_RESET);
-                                                    System.out.print(" ");
-                                                } else if (finalrightdown) {
-                                                    System.out.print(ANSI_MAGENTA + answer[i][j] + ANSI_RESET);
-                                                    System.out.print(" ");
-                                                } else if (finaldown) {
-                                                    System.out.print(ANSI_PURPLE + answer[i][j] + ANSI_RESET);
-                                                    System.out.print(" ");
-                                                } else if (finalleftdown) {
-                                                    System.out.print(ANSI_RED + answer[i][j] + ANSI_RESET);
-                                                    System.out.print(" ");
-                                                } else if (finalleft) {
-                                                    System.out.print(ANSI_WHITE + answer[i][j] + ANSI_RESET);
-                                                    System.out.print(" ");
-                                                } else if (finalleftup) {
-                                                    System.out.print(ANSI_YELLOW + answer[i][j] + ANSI_RESET);
-                                                    System.out.print(" ");
-                                                }
-                                                
+                                                System.out.print(color_codes[i][j] + answer[i][j] + ANSI_RESET);
+                                                System.out.print(" ");
                                             }
                                             System.out.println();
                                         }
