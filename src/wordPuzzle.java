@@ -54,7 +54,7 @@ public class wordPuzzle {
         finalleft = false;
         finalleftup = false;
 
-        System.out.println("Please input your file name in the src folder:");
+        System.out.println("Please input your file name in the test folder:");
         path1 = "../test/";
         Scanner input = new Scanner(System.in);
         path2 = input.nextLine();
