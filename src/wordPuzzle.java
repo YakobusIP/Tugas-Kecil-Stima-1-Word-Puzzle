@@ -27,14 +27,14 @@ public class wordPuzzle {
         int i, j, k, x, y;
         int letterCounter, charIndexX, charIndexY, stepsTaken;
         int ansX, ansY;
-        String testCase, chars;
+        String testCase, chars, path1, path2, fullPath;
         Character currentChar;
         boolean markFound = false;
         boolean checkFlag;
         boolean up, rightup, right, rightdown, down, leftdown, left, leftup;
         boolean finalup, finalrightup, finalright, finalrightdown, finaldown, finalleftdown, finalleft, finalleftup;
-        long startComp, endComp, compDur;
-        float elapsedTime;
+        long startComp, endComp, compDur, startProg, endProg, progDur;
+        float elapsedTime, fileDuration;
 
         // INITIATE BOOLEANS
         up = false;
@@ -53,13 +53,21 @@ public class wordPuzzle {
         finalleftdown = false;
         finalleft = false;
         finalleftup = false;
+
+        System.out.println("Please input your file name in the src folder:");
+        path1 = "../test/";
+        Scanner input = new Scanner(System.in);
+        path2 = input.nextLine();
+        fullPath = path1 + path2;
+        startProg = System.nanoTime();
+        input.close();
+
         try {
-            List<String> fullFile = Files.readAllLines(Paths.get("large.txt"));
+            List<String> fullFile = Files.readAllLines(Paths.get(fullPath));
             ArrayList<ArrayList<Character>> game = new ArrayList<ArrayList<Character>>();
 
             // READING MATRIX
             for (String line : fullFile) {
-                
                 if (line.trim().isEmpty()) {
                     break;
                 } else {
@@ -108,10 +116,10 @@ public class wordPuzzle {
                             if (game.get(i).get(j) == testCase.charAt(0)) {
                                 k = 0;
                                 x = j; // Letak baris
-                                System.out.println("Currently reading:");
-                                System.out.println("X" + x);
+                                //System.out.println("Currently reading:");
+                                //System.out.println("X" + x);
                                 y = i; // Letak kolom
-                                System.out.println("Y" + y);
+                                //System.out.println("Y" + y);
                                 // CHECK EVERY DIRECTION
                                 // IF CURRENTLY SCANNING TOP LEFT CORNER
                                 if ((i == 0) && (j == 0)) {
@@ -333,7 +341,7 @@ public class wordPuzzle {
                                         leftup = true;
                                     }
                                 }
-                                
+                                /*
                                 System.out.println("Up:" + up);
                                 System.out.println("Rightup:" + rightup);
                                 System.out.println("Right:" + right);
@@ -341,7 +349,7 @@ public class wordPuzzle {
                                 System.out.println("Down:" + down);
                                 System.out.println("Leftdown:" + leftdown); 
                                 System.out.println("Left:" + left);
-                                System.out.println("Leftup:" + leftup);
+                                System.out.println("Leftup:" + leftup);*/
 
                                 // ITERATE THE REST OF CHARACTERS BASED ON FLAG
                                 checkFlag = true;
@@ -364,9 +372,17 @@ public class wordPuzzle {
                                                     up = false;
                                                 }
                                             } else {
+                                                x = j;
+                                                y = i;
+                                                k = 0;
+                                                letterCounter = 1;
                                                 up = false;
                                             }  
                                         } else {
+                                            x = j;
+                                            y = i;
+                                            k = 0;
+                                            letterCounter = 1;
                                             up = false;
                                         }    
                                     }
@@ -384,9 +400,17 @@ public class wordPuzzle {
                                                     rightup = false;
                                                 }
                                             } else {
+                                                x = j;
+                                                y = i;
+                                                k = 0;
+                                                letterCounter = 1;
                                                 rightup = false;
                                             }
                                         } else {
+                                            x = j;
+                                            y = i;
+                                            k = 0;
+                                            letterCounter = 1;
                                             rightup = false;
                                         }
                                     }
@@ -403,13 +427,22 @@ public class wordPuzzle {
                                                     right = false;
                                                 }
                                             } else {
+                                                x = j;
+                                                y = i;
+                                                k = 0;
+                                                letterCounter = 1;
                                                 right = false;
                                             }
-                                        } else {
+                                        } else {    
+                                            x = j;
+                                            y = i;
+                                            k = 0;    
+                                            letterCounter = 1;
                                             right = false;
                                         }
                                     }
                                     else if (rightdown) {
+                                        
                                         charIndexX = x+1;
                                         charIndexY = y+1;
                                         if ((isWithinRange(charIndexX, 0, game.get(i).size())) && (isWithinRange(charIndexY, 0, game.size()))) {
@@ -423,9 +456,17 @@ public class wordPuzzle {
                                                     rightdown = false;
                                                 }
                                             } else {
+                                                x = j;
+                                                y = i;
+                                                k = 0;
+                                                letterCounter = 1;
                                                 rightdown = false;
                                             }
                                         } else {
+                                            x = j;
+                                            y = i;
+                                            k = 0;
+                                            letterCounter = 1;
                                             rightdown = false;
                                         }
                                     }
@@ -442,9 +483,17 @@ public class wordPuzzle {
                                                     down = false;
                                                 }
                                             } else {
+                                                x = j;
+                                                y = i;
+                                                k = 0;
+                                                letterCounter = 1;
                                                 down = false;
                                             }
                                         } else {
+                                            x = j;
+                                            y = i;
+                                            k = 0;
+                                            letterCounter = 1;
                                             down = false;
                                         }
                                     }
@@ -462,9 +511,17 @@ public class wordPuzzle {
                                                     leftdown = false;
                                                 }
                                             } else {
+                                                x = j;
+                                                y = i;
+                                                k = 0;
+                                                letterCounter = 1;
                                                 leftdown = false;
                                             }
                                         } else {
+                                            x = j;
+                                            y = i;
+                                            k = 0;
+                                            letterCounter = 1;
                                             leftdown = false;
                                         }
                                     }
@@ -481,9 +538,17 @@ public class wordPuzzle {
                                                     left = false;
                                                 }
                                             } else {
+                                                x = j;
+                                                y = i;
+                                                k = 0;
+                                                letterCounter = 1;
                                                 left = false;
                                             }
                                         } else {
+                                            x = j;
+                                            y = i;
+                                            k = 0;
+                                            letterCounter = 1;
                                             left = false;
                                         }
                                     }
@@ -502,9 +567,17 @@ public class wordPuzzle {
                                                     leftup = false;
                                                 }
                                             } else {
+                                                x = j;
+                                                y = i;
+                                                k = 0;
+                                                letterCounter = 1;
                                                 leftup = false;
                                             }
                                         } else {
+                                            x = j;
+                                            y = i;
+                                            k = 0;
+                                            letterCounter = 1;
                                             leftup = false;
                                         }
                                     }
@@ -610,6 +683,10 @@ public class wordPuzzle {
 
         } catch (IOException e) {
             System.out.println("File not found!");
-        }    
+        }
+        endProg = System.nanoTime();
+        progDur = endProg - startProg;
+        fileDuration = (float)progDur/(float)1000000;
+        System.out.println("Program fully exited in " + fileDuration + " ms"); 
     }
 }
