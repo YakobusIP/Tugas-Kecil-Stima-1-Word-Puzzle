@@ -1,9 +1,9 @@
 # Word Search Puzzle Solver
 ## General Information 
-Program untuk menemukan solusi dari sebuah word search puzzle menggunakan algoritma brute-force
-Program akan memeriksa elemen matriks puzzle secara satu persatu untuk menemukan kata yang dicari
-Apabila kata telah ditemukan, maka program akan menyimpannya ke dalam matriks baru dan mencetaknya ke layar pengguna
-Program **tidak** menggunakan teknik heuristik untuk mengabaikan proses pencarian
+Program untuk menemukan solusi dari sebuah word search puzzle menggunakan algoritma brute-force.
+Program akan memeriksa elemen matriks puzzle secara satu persatu untuk menemukan kata yang dicari.
+Apabila kata telah ditemukan, maka program akan menyimpannya ke dalam matriks baru dan mencetaknya ke layar pengguna.
+Program **tidak** menggunakan teknik heuristik untuk mengabaikan proses pencarian.
 
 ## Setup
 Untuk Windows Operating System
