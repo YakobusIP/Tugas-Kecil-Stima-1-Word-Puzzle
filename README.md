@@ -9,7 +9,7 @@ reg add HKEY_CURRENT_USER\Console /v VirtualTerminalLevel /t REG_DWORD /d 0x0000
 ```
 2. Tutup windows command prompt dan jalankan file batch yang terdapat di folder bin
 3. Program akan meminta nama file yang sudah disediakan di folder test
-4. Jika ingin menambahkan file baru, isi dari file harus sesuai dengan ketentuan sebagai berikut
+4. Jika ingin menambahkan file baru, isi dari file harus sesuai dengan ketentuan sebagai berikut (Letakkan matriks di bagian atas, beri jarak satu line, dan masukkan tes kasus)
 ```
 J S O L U T I S
 S U N A R U U A
@@ -28,3 +28,6 @@ URANUS
 NEPTUNE
 JUPITER
 ```
+
+## Created by:
+Yakobus Iryanto Prasethio (13520104)
