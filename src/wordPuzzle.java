@@ -218,7 +218,7 @@ public class wordPuzzle {
                                         left = true;
                                     }
                                 // IF CURRENTLY SCANNING LEFT COLUMN
-                                }  else if ((i != 0) && (j == 0)) {
+                                } else if ((i != 0) && (j == 0)) {
                                     // Arah atas
                                     if (testCase.charAt(k+1) == game.get(y-1).get(x)) {
                                         stepsTaken++;
