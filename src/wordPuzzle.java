@@ -15,6 +15,7 @@ public class wordPuzzle {
     public static final String ANSI_CYAN = "\033[36m";
     public static final String ANSI_BRIGHT_RED = "\033[91m";
 
+    // FUNCTION TO CHECK IF AN INDEX IS WITHIN THE CORRECT RANGE
     public static boolean isWithinRange(int index, int lowerBound, int upperBound) {
         if ((index >= lowerBound) && (index < upperBound)) {
             return true;
@@ -116,10 +117,8 @@ public class wordPuzzle {
                             if (game.get(i).get(j) == testCase.charAt(0)) {
                                 k = 0;
                                 x = j; // Letak baris
-                                //System.out.println("Currently reading:");
-                                //System.out.println("X" + x);
                                 y = i; // Letak kolom
-                                //System.out.println("Y" + y);
+
                                 // CHECK EVERY DIRECTION
                                 // IF CURRENTLY SCANNING TOP LEFT CORNER
                                 if ((i == 0) && (j == 0)) {
@@ -341,15 +340,6 @@ public class wordPuzzle {
                                         leftup = true;
                                     }
                                 }
-                                /*
-                                System.out.println("Up:" + up);
-                                System.out.println("Rightup:" + rightup);
-                                System.out.println("Right:" + right);
-                                System.out.println("Rightdown:" + rightdown);
-                                System.out.println("Down:" + down);
-                                System.out.println("Leftdown:" + leftdown); 
-                                System.out.println("Left:" + left);
-                                System.out.println("Leftup:" + leftup);*/
 
                                 // ITERATE THE REST OF CHARACTERS BASED ON FLAG
                                 checkFlag = true;
@@ -358,7 +348,6 @@ public class wordPuzzle {
                                 charIndexX = 0;
                                 charIndexY = 0;
                                 while ((k < testCase.length()) && (checkFlag)) {
-                                    //System.out.println("Letter counter:" + letterCounter);
                                     if (up) {
                                         charIndexX = x;
                                         charIndexY = y-1;
@@ -586,15 +575,6 @@ public class wordPuzzle {
                                         endComp = System.nanoTime();
                                         compDur = endComp - startComp;
                                         elapsedTime = (float)compDur / (float)1000000;
-                                        /*
-                                        System.out.println("Up:" + finalup);
-                                        System.out.println("Rightup:" + finalrightup);
-                                        System.out.println("Right:" + finalright);
-                                        System.out.println("Rightdown:" + finalrightdown);
-                                        System.out.println("Down:" + finaldown);
-                                        System.out.println("Leftdown:" + finalleftdown); 
-                                        System.out.println("Left:" + finalleft);
-                                        System.out.println("Leftup:" + finalleftup); */
 
                                         System.out.println("========== Word Found! ==========");
                                         System.out.println("Found " + testCase + " at X:" + (j+1) + " and Y:" + (i+1));
@@ -605,8 +585,6 @@ public class wordPuzzle {
                                         
                                         ansX = j;
                                         ansY = i;
-                                        //System.out.println(ansX);
-                                        //System.out.println(ansY);
                                         for (i=0;i<testCase.length();i++) {
                                             if (finalup) {
                                                 currentChar = testCase.charAt(i);
