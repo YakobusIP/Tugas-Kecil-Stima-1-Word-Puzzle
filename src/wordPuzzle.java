@@ -577,7 +577,6 @@ public class wordPuzzle {
                                         elapsedTime = (float)compDur / (float)1000000;
 
                                         System.out.println("========== Word Found! ==========");
-                                        //System.out.println("Found " + testCase + " at X:" + (j+1) + " and Y:" + (i+1));
                                         System.out.println("Program took " + stepsTaken + " step(s) to find the word");
                                         System.out.print("Exited in ");
                                         System.out.printf("%.5f", elapsedTime);
